@@ -14,6 +14,40 @@ import org.junit.Test;
 public class DBOperationTester {
 
 	@Test
+	public void testDoGetHttpServletRequestHttpServletResponse1() throws SQLException, IOException, ServletException {
+		StuffController servlet = new StuffController();
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		DbConnect.getInstance().getConnection();
+		final String nm = "name";
+
+		when(request.getParameter(nm)).thenReturn("testName");
+		when(request.getParameter("description")).thenReturn("testDescription");
+		when(request.getParameter("quantity")).thenReturn("1");
+		when(request.getParameter("location")).thenReturn("testLocation");
+		servlet.insertStuff(request, response);
+		assertTrue("check", nm.equals("testName"));
+	}
+
+	@Test
+	public void testDoGetHttpServletRequestHttpServletResponse2() throws SQLException, IOException, ServletException {
+		StuffController servlet = new StuffController();
+		HttpServletRequest request = mock(HttpServletRequest.class);
+		HttpServletResponse response = mock(HttpServletResponse.class);
+		DbConnect.getInstance().getConnection();
+
+		when(request.getParameter("id")).thenReturn("4");
+		
+		servlet.deleteStuff(request, response);
+//	    assertTrue("check", nm.equals("testName"));
+	}
+
+	@Test
+	public void testDoPostHttpServletRequestHttpServletResponse1() {
+		fail("Not yet implemented");
+	}
+
+	@Test
 	public void testStuffController() {
 		fail("Not yet implemented");
 	}
@@ -40,27 +74,6 @@ public class DBOperationTester {
 
 	@Test
 	public void testHttpServlet() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDoGetHttpServletRequestHttpServletResponse1() throws SQLException, IOException, ServletException {
-		StuffController servlet = new StuffController();
-		HttpServletRequest request = mock(HttpServletRequest.class);
-		HttpServletResponse response = mock(HttpServletResponse.class);
-		DbConnect.getInstance().getConnection();
-		final String nm= "name";
-		
-	    when(request.getParameter(nm)).thenReturn("testName");
-	    when(request.getParameter("description")).thenReturn("testDescription");
-	    when(request.getParameter("quantity")).thenReturn("1");
-	    when(request.getParameter("location")).thenReturn("testLocation");
-	    servlet.insertStuff(request, response);
-	    assertTrue("check", nm.equals("testName"));
-	}
-
-	@Test
-	public void testDoPostHttpServletRequestHttpServletResponse1() {
 		fail("Not yet implemented");
 	}
 
